@@ -1,0 +1,119 @@
+@startuml
+set namespaceSeparator ::
+
+class "untitled::lista_cartas.dart::lista_cartas" {
+  +State<lista_cartas> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "untitled::lista_cartas.dart::lista_cartas"
+
+class "untitled::lista_cartas.dart::_lista_cartasState" {
+  +Map<dynamic, dynamic> data
+  +void actualizar()
+  +void getData()
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "untitled::lista_cartas.dart::_lista_cartasState"
+
+class "untitled::jugadorIA.dart::jugadorIA" {
+  +carta elegir_carta()
+  +dynamic robar_carta()
+}
+
+"untitled::jugador.dart::jugador" <|-- "untitled::jugadorIA.dart::jugadorIA"
+
+class "untitled::jugador.dart::jugador" {
+  +List<carta> mano
+  +int cartas_restantes
+  +carta elegir_carta()
+  +dynamic robar_carta()
+}
+
+class "untitled::home.dart::Home" {
+  +carta cartainicial
+  +jugadorIA jugadoria
+  +jugadorPersona jugadorpersona
+  +List<jugador> jugadores
+  +tablero tablero1
+  +dynamic juego()
+  +dynamic empezarJuego()
+  +_homeState createState()
+}
+
+"untitled::home.dart::Home" o-- "untitled::carta.dart::carta"
+"untitled::home.dart::Home" o-- "untitled::jugadorIA.dart::jugadorIA"
+"untitled::home.dart::Home" o-- "untitled::jugadorPersona.dart::jugadorPersona"
+"untitled::home.dart::Home" o-- "untitled::tablero.dart::tablero"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "untitled::home.dart::Home"
+
+class "untitled::home.dart::_homeState" {
+  +Juego juego1
+  +Widget build()
+}
+
+"untitled::home.dart::_homeState" o-- "untitled::juego.dart::Juego"
+"flutter::src::widgets::framework.dart::State" <|-- "untitled::home.dart::_homeState"
+
+class "untitled::carta.dart::carta" {
+  +String color
+  +int numero
+  +void cartaColorSet()
+  +void cartaNumeroSet()
+  +String getColor()
+  +int getNumero()
+}
+
+class "untitled::juego.dart::Juego" {
+  +carta cartainicial
+  +jugadorIA jugadoria
+  +jugadorPersona jugadorpersona
+  +List<jugador> jugadores
+  +tablero tablero1
+  +dynamic crearJuego()
+  +_juegoState createState()
+}
+
+"untitled::juego.dart::Juego" o-- "untitled::carta.dart::carta"
+"untitled::juego.dart::Juego" o-- "untitled::jugadorIA.dart::jugadorIA"
+"untitled::juego.dart::Juego" o-- "untitled::jugadorPersona.dart::jugadorPersona"
+"untitled::juego.dart::Juego" o-- "untitled::tablero.dart::tablero"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "untitled::juego.dart::Juego"
+
+class "untitled::juego.dart::_juegoState" {
+  +Juego actual
+  +dynamic setTablero()
+  +Widget build()
+}
+
+"untitled::juego.dart::_juegoState" o-- "untitled::juego.dart::Juego"
+"flutter::src::widgets::framework.dart::State" <|-- "untitled::juego.dart::_juegoState"
+
+class "untitled::jugadorPersona.dart::jugadorPersona" {
+  +carta elegir_carta()
+  +dynamic robar_carta()
+}
+
+"untitled::jugador.dart::jugador" <|-- "untitled::jugadorPersona.dart::jugadorPersona"
+
+class "untitled::tablero.dart::tablero" {
+  +int numeroRonda
+  +List<jugador> jugadores
+  +int numJugadores
+  +carta ultimaCarta
+  +List<carta> mazo
+  +int getNumeroRonda()
+  +jugador getJugador()
+  +List<jugador> getJugadores()
+  +int getNumeroJugadores()
+  +carta getUltimaCarta()
+  +List<carta> getMazo()
+  +void asignarCartas()
+  +void jugar()
+}
+
+"untitled::tablero.dart::tablero" o-- "untitled::carta.dart::carta"
+
+
+@enduml
